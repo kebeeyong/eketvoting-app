@@ -8,6 +8,5 @@ var config = {
     // sessionSecret: process.env.SESSION_SECRET || 'prodsecretkey'
     sessionSecret: process.env.SESSION_SECRET || 'Lakers23'
 };
-;
 exports.default = config;
 //# sourceMappingURL=production.js.map

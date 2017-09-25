@@ -6,6 +6,6 @@ const config = {
    // sessionSecret: process.env.SESSION_SECRET || 'prodsecretkey'
    sessionSecret: process.env.SESSION_SECRET || 'Lakers23'
 };
-};
+
 
 export default config;
