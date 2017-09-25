@@ -45,8 +45,7 @@ db.once('open', () => {
   setRoutes(app);
 
   app.get('/*', function(req, res) {
-  //  res.sendFile(path.join(__dirname, '../public/index.html'));
-  res.sendFile(path.join(__dirname, '../index.html'));
+    res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
   if (!module.parent) {
