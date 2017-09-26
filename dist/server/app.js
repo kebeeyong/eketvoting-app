@@ -37,7 +37,8 @@ db.once('open', function () {
     routes_1.default(app);
     app.get('/*', function (req, res) {
    //     res.sendFile(path.join(__dirname, '../public/index.html'));
-   res.sendFile(path.join(__dirname, '../index.html'));
+   res.sendFile(path.join(__dirname, 'dist' 'index.html'));
+   res.sendFile(index);
     });
     if (!module.parent) {
         app.listen(app.get('port'), function () {
