@@ -1,9 +1,9 @@
 {
-  "name": "voting-app",
+  "name": "eketvoting-app",
   "version": "1.0.0",
   "license": "MIT",
-  "author": "Prokhorova Ann",
-  "description": "FCC voting app",
+  "author": "Kebe Eyong",
+  "description": "POP voting app",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
