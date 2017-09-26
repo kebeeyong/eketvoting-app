@@ -19,7 +19,7 @@ export default class PollsController {
       return res.status(403).send({message: 'User is not authorized'});
     }
 
-    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+   // let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     let userVoted;
     let ipVoted;
 
@@ -83,7 +83,8 @@ export default class PollsController {
     if (req.user) {
       poll.users.push(req.user._id);
     }
-    poll.ips.push(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+  //  poll.ips.push(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+  poll.ips.push(req.headers['x-forwarded-for']);
     poll.save((err) => {
       if (err) return res.status(500).send(err);
       return res.send(poll);
