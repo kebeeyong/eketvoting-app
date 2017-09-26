@@ -15,7 +15,8 @@ var app = express();
 exports.app = app;
 var MongoStore = connectMongo(session);
 app.set('port', (process.env.PORT || 3000));
-app.use('/', express.static(path.join(__dirname, '../public')));
+//app.use('/', express.static(path.join(__dirname, '../public')));
+app.use(express.static('build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
@@ -36,9 +37,9 @@ db.once('open', function () {
     console.log('Connected to MongoDB');
     routes_1.default(app);
     //app.get('/*', function (req, res) {
-    app.get('/*', function (req, res) {
+    app.get('*', function (req, res) {
      //  res.sendFile(path.join(__dirname, '../public/index.html'));
-     res.sendFile(path.join(__dirname, './public/index.html'));
+     res.sendFile('index.html');
     
     });
     if (!module.parent) {
