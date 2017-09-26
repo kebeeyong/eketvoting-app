@@ -36,7 +36,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('Connected to MongoDB');
     routes_1.default(app);
-    app.get('/*', function (req, res) {
+    //app.get('/*', function (req, res) {
+        app.get('*', function (req, res) {
    //     res.sendFile(path.join(__dirname, '../public/index.html'));
    res.sendFile(path.join(__dirname, 'client' 'index.html'));
    res.sendFile(index);
