@@ -1,10 +1,11 @@
-# Voting app
+# Eket POP Voting app
 
-Project for [FCC](https://www.freecodecamp.org/challenges/build-a-voting-app)
 
-[Demo](https://voting-space.herokuapp.com/)
 
-Built based on [Angular Full Stack](https://github.com/DavideViolante/Angular-Full-Stack).
+
+
+Built based on [Angular Full Stack](https://github.com/DavideViolante/Angular-Full-Stack) and
+[Survey app](https://github.com/prohorova/voting-app).
 
 Uses the [MEAN stack](https://en.wikipedia.org/wiki/MEAN_(software_bundle)):
 * [**M**ongoose.js](http://www.mongoosejs.com) ([MongoDB](https://www.mongodb.com)): database
@@ -26,7 +27,7 @@ Uses the [MEAN stack](https://en.wikipedia.org/wiki/MEAN_(software_bundle)):
 A window will automatically open at [localhost:4200](http://localhost:4200). Angular and Express files are being watched. Any change automatically creates a new bundle, restart Express server and reload your browser.
 
 ### Production mode
-`npm run prod`: run the project with a production bundle and AOT compilation
+`ng build --env=prod ` or `npm run prod`: run the project with a production bundle and AOT compilation
 
 ## Running unit tests
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
