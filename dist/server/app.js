@@ -1,50 +1,59 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var bodyParser = require("body-parser");
-var express = require("express");
-var morgan = require("morgan");
-var mongoose = require("mongoose");
-var path = require("path");
-var session = require("express-session");
-var passport = require("passport");
-var connectMongo = require("connect-mongo");
-var config_1 = require("./config/config");
-var passport_1 = require("./config/passport");
-var routes_1 = require("./routes");
-var app = express();
-exports.app = app;
-var MongoStore = connectMongo(session);
+import * as bodyParser from 'body-parser';
+import * as express from 'express';
+import * as morgan from 'morgan';
+import * as mongoose from 'mongoose';
+import * as path from 'path';
+import * as session from 'express-session';
+import * as passport from 'passport';
+import * as connectMongo from 'connect-mongo';
+
+import config from './config/config';
+import setPassport from './config/passport';
+import setRoutes from './routes';
+
+const app = express();
+const MongoStore = connectMongo(session);
+
 app.set('port', (process.env.PORT || 3000));
+
 app.use('/', express.static(path.join(__dirname, '../public')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(morgan('dev'));
-mongoose.connect(config_1.default.db);
-var db = mongoose.connection;
-mongoose.Promise = global.Promise;
+
+mongoose.connect(config.db);
+const db = mongoose.connection;
+(<any>mongoose).Promise = global.Promise;
+
 app.use(session({
-    secret: config_1.default.sessionSecret,
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: db })
+  secret: config.sessionSecret,
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({mongooseConnection: db})
 }));
-passport_1.default();
+
+setPassport();
 app.use(passport.initialize());
 app.use(passport.session());
+
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    console.log('Connected to MongoDB');
-    routes_1.default(app);
-    //app.get('/*', function (req, res) {
-    app.get('/*', function (req, res) {
-      //res.sendFile(path.join(__dirname, '../public/index.html'));
-   //res.sendFile(path.join(__dirname, 'client' 'index.html'));
-   //res.sendFile(index);
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+
+  setRoutes(app);
+
+  app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+  });
+
+  if (!module.parent) {
+    app.listen(app.get('port'), () => {
+      console.log('Server listening on port ' + app.get('port'));
     });
-    if (!module.parent) {
-        app.listen(app.get('port'), function () {
-            console.log('Server listening on port ' + app.get('port'));
-        });
-    }
+  }
+
 });
-//# sourceMappingURL=app.js.map
+
+export { app };
