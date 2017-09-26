@@ -38,7 +38,7 @@ db.once('open', function () {
     //app.get('/*', function (req, res) {
     app.get('/*', function (req, res) {
      //  res.sendFile(path.join(__dirname, '../public/index.html'));
-     res.sendFile(path.join(__dirname, '../../client/*.html'));
+     res.sendFile(path.join(__dirname, '../../client/index.html'));
     
     });
     if (!module.parent) {
