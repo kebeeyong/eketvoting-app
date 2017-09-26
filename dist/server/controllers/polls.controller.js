@@ -17,7 +17,8 @@ var PollsController = (function () {
             if (value && !req.isAuthenticated()) {
                 return res.status(403).send({ message: 'User is not authorized' });
             }
-            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            // let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            var ip = req.headers['x-forwarded-for'];
             var userVoted;
             var ipVoted;
             userVoted = req.user && req.poll.users.some(function (user) {
@@ -65,7 +66,8 @@ var PollsController = (function () {
             if (req.user) {
                 poll.users.push(req.user._id);
             }
-            poll.ips.push(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+            //  poll.ips.push(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+            poll.ips.push(req.headers['x-forwarded-for']);
             poll.save(function (err) {
                 if (err)
                     return res.status(500).send(err);

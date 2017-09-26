@@ -20,6 +20,7 @@ export default class PollsController {
     }
 
    // let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    let ip = req.headers['x-forwarded-for'];
     let userVoted;
     let ipVoted;
 
