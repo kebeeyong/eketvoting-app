@@ -39,7 +39,7 @@ db.once('open', function () {
    // app.get('/*', function (req, res) {
     //    res.sendFile(path.join(__dirname, '../public/index.html'));
     //});
-if (app.get('env') === 'development') {
+if (app.get('env') === 'production') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
