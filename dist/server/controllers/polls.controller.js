@@ -17,16 +17,14 @@ var PollsController = (function () {
             if (value && !req.isAuthenticated()) {
                 return res.status(403).send({ message: 'User is not authorized' });
             }
-            // let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-            var ip = req.headers['x-forwarded-for'];
+            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
             var userVoted;
             var ipVoted;
             userVoted = req.user && req.poll.users.some(function (user) {
                 return user.equals(req.user.id);
             });
             ipVoted = req.poll.ips.indexOf(ip) !== -1;
-            /*  if (userVoted || ipVoted) {  */
-            if (userVoted) {
+            if (userVoted || ipVoted) {
                 return res.status(403).send({ message: 'You already voted' });
             }
             return next();
@@ -66,8 +64,7 @@ var PollsController = (function () {
             if (req.user) {
                 poll.users.push(req.user._id);
             }
-            //  poll.ips.push(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
-            poll.ips.push(req.headers['x-forwarded-for']);
+            poll.ips.push(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
             poll.save(function (err) {
                 if (err)
                     return res.status(500).send(err);
@@ -88,4 +85,5 @@ var PollsController = (function () {
     return PollsController;
 }());
 exports.default = PollsController;
+//# sourceMappingURL=polls.controller.js.map 
 //# sourceMappingURL=polls.controller.js.map

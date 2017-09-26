@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var chai = require("chai");
 var should = chai.should();
 var user_model_1 = require("../../models/user.model");
-var poll_model_1 = require("../../models/poll.model");
+var poll_model_2 = require("../../models/poll.model");
 describe('Poll model:', function () {
     var user;
     var poll;
@@ -16,7 +16,7 @@ describe('Poll model:', function () {
         user = new user_model_1.default({ name: userCredentials.name, email: userCredentials.email });
         user.hashPassword(userCredentials.password);
         user.save(function () {
-            poll = new poll_model_1.default({
+            poll = new poll_model_2.default({
                 name: 'Poll name',
                 createdBy: user,
                 options: [
@@ -29,7 +29,7 @@ describe('Poll model:', function () {
     });
     afterEach(function (done) {
         user_model_1.default.remove({}, function () {
-            poll_model_1.default.remove({}, done);
+            poll_model_2.default.remove({}, done);
         });
     });
     it('should not save poll without name', function (done) {

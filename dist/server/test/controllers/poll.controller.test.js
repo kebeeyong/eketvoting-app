@@ -4,7 +4,7 @@ var chai = require("chai");
 var chaiHttp = require("chai-http");
 var app_1 = require("../../app");
 var user_model_1 = require("../../models/user.model");
-var poll_model_1 = require("../../models/poll.model");
+var poll_model_2 = require("../../models/poll.model");
 chai.use(chaiHttp);
 var should = chai.should();
 describe('Poll controller', function () {
@@ -21,7 +21,7 @@ describe('Poll controller', function () {
         });
         user.hashPassword(userCredentials.password);
         user.save(function () {
-            poll = new poll_model_1.default({
+            poll = new poll_model_2.default({
                 name: 'Poll name',
                 createdBy: user,
                 options: [
@@ -33,7 +33,7 @@ describe('Poll controller', function () {
         });
     });
     afterEach(function (done) {
-        poll_model_1.default.remove({}, function () {
+        poll_model_2.default.remove({}, function () {
             user_model_1.default.remove({}, done);
         });
     });
@@ -157,7 +157,7 @@ describe('Poll controller', function () {
                     .set('cookie', cookie)
                     .end(function (err, res) {
                     res.should.have.status(200);
-                    poll_model_1.default.find({}, function (err, polls) {
+                    poll_model_2.default.find({}, function (err, polls) {
                         polls.should.be.an('array');
                         polls.should.have.lengthOf(0);
                         done();
@@ -175,7 +175,7 @@ describe('Poll controller', function () {
                 .send({ id: optionId })
                 .end(function (err, res) {
                 res.should.have.status(200);
-                poll_model_1.default.findById(pollId, function (err, updatedPole) {
+                poll_model_2.default.findById(pollId, function (err, updatedPole) {
                     should.equal(updatedPole.options[0].votes, 1);
                     done();
                 });
@@ -209,7 +209,7 @@ describe('Poll controller', function () {
                     .set('cookie', cookie)
                     .end(function (err, res) {
                     res.should.have.status(200);
-                    poll_model_1.default.findById(poll._id, function (err, updatedPoll) {
+                    poll_model_2.default.findById(poll._id, function (err, updatedPoll) {
                         updatedPoll.options.should.have.lengthOf(3);
                         should.equal(updatedPoll.options[2].value, newValue);
                         should.equal(updatedPoll.options[2].votes, 1);
