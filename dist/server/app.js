@@ -15,7 +15,8 @@ var app = express();
 exports.app = app;
 var MongoStore = connectMongo(session);
 app.set('port', (process.env.PORT || 3000));
-app.use('/', express.static(path.join(__dirname, '../public')));
+//app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
@@ -35,9 +36,18 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('Connected to MongoDB');
     routes_1.default(app);
-    app.get('/*', function (req, res) {
-        res.sendFile(path.join(__dirname, '../public/index.html'));
+   // app.get('/*', function (req, res) {
+    //    res.sendFile(path.join(__dirname, '../public/index.html'));
+    //});
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
+}
     if (!module.parent) {
         app.listen(app.get('port'), function () {
             console.log('Server listening on port ' + app.get('port'));
