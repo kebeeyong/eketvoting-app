@@ -1,0 +1,15 @@
+<div class="center-container">
+  <h1 class="title">Login</h1>
+  <form [formGroup]="userForm" (submit)="submit(userForm.value)">
+    <md-input-container>
+     <input mdInput type="email"  placeholder="(State code Number@eketpop.com)" [formControl]="userForm.controls['email']">
+    </md-input-container> 
+    <md-input-container>
+      <input mdInput type="password"  placeholder="State code Number:" [formControl]="userForm.controls['password']">
+    </md-input-container>
+    <button type="submit" md-raised-button color="primary" [disabled]="!userForm.valid">Login</button>
+  <!--  <button type="submit" md-raised-button color="primary" [disabled]="userForm.valid">Login</button> -->
+   <!-- <button type="button" md-button color="accent" routerLink="/register">Register</button> -->
+  </form>
+</div>
+
